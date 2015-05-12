@@ -1,11 +1,11 @@
-#gulp-requirejs
+#gulp-requirejs2
 
 [![Dependency Status](https://david-dm.org/robinthrift/gulp-requirejs.png)](https://david-dm.org/robinthrift/gulp-requirejs)
 [![Build Status](https://travis-ci.org/RobinThrift/gulp-requirejs.png?branch=master)](https://travis-ci.org/RobinThrift/gulp-requirejs)
 
 ## Information
 
-A small, simply, very easy wrapper around the [require.js optimizer](https://github.com/jrburke/r.js) to work with [gulp.js](https://github.com/gulpjs/gulp)
+A small, simple, very easy wrapper around the [require.js optimizer](https://github.com/jrburke/r.js) to work with [gulp.js](https://github.com/gulpjs/gulp)
 
 <table>
 <tr> 
@@ -45,13 +45,13 @@ var gulp = require('gulp'),
 gulp.task('requirejsBuild', function() {
     rjs({
         baseUrl: 'path/to/your/base/file.js',
-        out: 'FILENAME\_TO\_BE\_OUTPUTTED',
+        out: 'FILENAME_TO_BE_OUTPUTTED',
         shim: {
             // standard require.js shim options
         },
         // ... more require.js options
     })
-        .pipe(gulp.dest('./delpoy/')); // pipe it to the output DIR
+        .pipe(gulp.dest('./deploy/')); // pipe it to the output DIR
 });
 ```
 
@@ -59,7 +59,7 @@ gulp.task('requirejsBuild', function() {
 
 gulp-requirejs will emit errors when you don't pass an options object and if the `baseUrl` or `out` properties are undefined. 
   
-The requiere.js optimizer itself might also emit errors; unfortunately there's no way of catching them elegantly at the moment. 
+The require.js optimizer itself might also emit errors; unfortunately there's no way of catching them elegantly at the moment. 
 
 
 ## Options
