@@ -9,7 +9,7 @@ A small, simple, very easy wrapper around the [require.js optimizer](https://git
 
 <table>
 <tr> 
-<td>Package</td><td>gulp-requirejs</td>
+<td>Package</td><td>gulp-requirejs2</td>
 </tr>
 <tr>
 <td>Description</td>
@@ -24,10 +24,10 @@ A small, simple, very easy wrapper around the [require.js optimizer](https://git
 
 ##Installation
 
-Simply add `gulp-requirejs` as a dev-dependency in your package.json or run
+Simply add `gulp-requirejs2` as a dev-dependency in your package.json or run
 
 ```bash
-$ npm install --save-dev gulp-requirejs
+$ npm install --save-dev gulp-requirejs2
 ```
 
 ## Usage
@@ -40,7 +40,7 @@ The resulting stream can be treated like a regular `gulp.src(...)` stream.
 
 ```javascript
 var gulp = require('gulp'),
-    rjs = require('gulp-requirejs');
+    rjs = require('gulp-requirejs2');
 
 gulp.task('requirejsBuild', function() {
     rjs({

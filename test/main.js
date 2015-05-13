@@ -6,7 +6,7 @@ var grjs   = require('../'),
 require('mocha');
 
 
-describe('gulp-requirejs', function () {
+describe('gulp-requirejs2', function () {
 
     describe('simple AMD file', function () {
 
@@ -165,19 +165,18 @@ describe('gulp-requirejs', function () {
             done();
         });
 
-        // it('should emit an error event when the require.js optimizer finds an error', function(done) {
-
-        //     var stream = grjs({
-        //         baseUrl: 'test/dir',
-        //         out: 'testURL'
-        //     });
-
-        //     stream.on('error', function(err) {
-        //         done();
-        //     });
-
-        // });
-
+        // todo
+        //it('should emit an error event when the require.js optimizer finds an error', function (done) {
+        //    var stream = grjs({
+        //        name   : 'testError',
+        //        baseUrl: 'test/dir',
+        //        out    : 'testURL'
+        //    });
+        //
+        //    stream.on('error', function (err) {
+        //        done();
+        //    });
+        //});
     });
 
 });

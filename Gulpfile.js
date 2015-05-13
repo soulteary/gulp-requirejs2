@@ -12,7 +12,7 @@ gulp.task('default', ['scripts:lint'], function () {});
 
 gulp.task('scripts:build', function () {
     return gulp.src('./src/index.js')
-        .pipe(uglyfly())
+        //.pipe(uglyfly())
         .pipe(concat("index.js"))
         .pipe(gulp.dest("./"));
 });

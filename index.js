@@ -1,1 +1,46 @@
-function optimize(e,i){e.out=i,e.optimize=e.optimize||"none",requirejs.optimize(e)}var gulpUtil=require("gulp-util"),requirejs=require("requirejs"),PluginError=gulpUtil.PluginError,File=gulpUtil.File,fs=require("fs"),es=require("event-stream"),pkg=JSON.parse(fs.readFileSync("./package.json","utf8")),pluginName=pkg.name;module.exports=function(e){"use strict";if(!e)throw new PluginError(pluginName,"Missing options array!");if(!e.out&&"string"!=typeof e.out)throw new PluginError(pluginName,"Only single file outputs are supported right now, please pass a valid output file name!");if(!e.baseUrl)throw new PluginError(pluginName,"Pipeing dirs/files is not supported right now, please specify the base path for your script.");var i=es.pause(),r=e.out;return optimize(e,function(e){i.write(new File({path:r,contents:new Buffer(e)})),i.send()}),i};
+var gulpUtil    = require('gulp-util'),
+    requirejs   = require('requirejs'),
+    PluginError = gulpUtil.PluginError,
+    File        = gulpUtil.File,
+    fs          = require('fs'),
+    es          = require('event-stream');
+
+var pkg        = JSON.parse(fs.readFileSync('./package.json', 'utf8')),
+    pluginName = pkg.name;
+
+
+module.exports = function (opts) {
+    'use strict';
+
+    if (!opts) {
+        throw new PluginError(pluginName, 'Missing options array!');
+    }
+
+    if (!opts.out && typeof opts.out !== 'string') {
+        throw new PluginError(pluginName, 'Only single file outputs are supported right now, please pass a valid output file name!');
+    }
+
+    if (!opts.baseUrl) {
+        throw new PluginError(pluginName, 'Pipeing dirs/files is not supported right now, please specify the base path for your script.');
+    }
+
+    // create the stream and save the file name (opts.out will be replaced by a callback function later)
+    var _s     = es.pause(),
+        _fName = opts.out;
+
+    // just a small wrapper around the r.js optimizer, we write a new gutil.File (vinyl) to the Stream, mocking a file, which can be handled
+    // regular gulp plugins (i hope...).
+
+    opts.out = function (text) {
+        _s.write(new File({
+            path    : _fName,
+            contents: new Buffer(text)
+        }));
+        _s.end();
+    };
+    opts.optimize = opts.optimize || 'none';
+    requirejs.optimize(opts);
+
+    // return the stream for chain .pipe()ing
+    return _s;
+};

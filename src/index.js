@@ -9,13 +9,6 @@ var pkg        = JSON.parse(fs.readFileSync('./package.json', 'utf8')),
     pluginName = pkg.name;
 
 
-// a small wrapper around the r.js optimizer
-function optimize (opts, cb) {
-    opts.out = cb;
-    opts.optimize = opts.optimize || 'none';
-    requirejs.optimize(opts);
-}
-
 module.exports = function (opts) {
     'use strict';
 
@@ -37,13 +30,16 @@ module.exports = function (opts) {
 
     // just a small wrapper around the r.js optimizer, we write a new gutil.File (vinyl) to the Stream, mocking a file, which can be handled
     // regular gulp plugins (i hope...).
-    optimize(opts, function (text) {
+
+    opts.out = function (text) {
         _s.write(new File({
             path    : _fName,
             contents: new Buffer(text)
         }));
-        _s.send();
-    });
+        _s.end();
+    };
+    opts.optimize = opts.optimize || 'none';
+    requirejs.optimize(opts);
 
     // return the stream for chain .pipe()ing
     return _s;
