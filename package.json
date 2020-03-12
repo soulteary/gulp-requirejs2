@@ -12,7 +12,7 @@
   "keywords": [],
   "dependencies": {
     "event-stream": "^3.0.20",
-    "gulp-util": "^2.2.20",
+    "gulp-util": "^3.0.1",
     "requirejs": "^2.1.8"
   },
   "devDependencies": {
